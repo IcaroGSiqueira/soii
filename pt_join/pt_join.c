@@ -17,10 +17,12 @@ void *Gerador(void *threadid){
 
 	printf("\nIniciou, thread #%ld!\n", tid);
 	
-	NUM_PONTOS=100000000000/NUM_THREADS;
+	NUM_PONTOS=1000000000000/NUM_THREADS;
 
 	for (i=0; i<NUM_PONTOS; i++){
 		resultado = sin(1.77)*cos(.99);
+		//printf("teste\n");
+		//printf("teste2\n");
 	}
 
 /* Testa o mutex. Se liberado ativa o mutex e avanca */
@@ -44,7 +46,12 @@ int main (int argc, char *argv[]){
 	//long ti, tempog;
 	void *status;
 	pthread_attr_t attr;
-	time_t inicio, fim, reghora;
+   	
+   	time_t inicio, fim, reghora;
+
+	//time_t reghora;
+	//struct timeval inicio,fim,timediff;
+
 	struct tm *tmptr;
 	
 	printf("\n\nPrograma principal iniciou\n\n");
@@ -54,6 +61,8 @@ int main (int argc, char *argv[]){
 	printf("Horario de Inicio: %s\n", asctime(tmptr));
 	
 	inicio= time(NULL);
+
+	//gettimeofday(&inicio,0x0);
 
 	if (pthread_mutex_init(&trava, NULL) != 0){
 		printf("\n mutex init failed\n");
@@ -90,12 +99,16 @@ int main (int argc, char *argv[]){
 	}
 
 	fim=time(NULL);
+
+	//gettimeofday(&fim,0x0);
 	
 	reghora = time(NULL);
 	tmptr = localtime(&reghora);
 	printf("\nHorario do Fim: %s", asctime(tmptr));
 	
 	fprintf(stdout, "Tempo Gasto = %f\n\n", difftime(fim, inicio));
+
+	//fprintf(stdout, "Tempo Gasto = %d\n\n", timeval_subtracao(&timediff,&fim,&inicio));
 
 	pthread_exit(NULL);
 	pthread_mutex_destroy(&trava);
