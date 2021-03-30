@@ -4,7 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <time.h>
-#define NUM_THREADS 12
+#define NUM_THREADS 3
 
 int vg;
 pthread_mutex_t trava;
@@ -17,7 +17,7 @@ void *Gerador(void *threadid){
 
 	printf("\nIniciou, thread #%ld!\n", tid);
 	
-	NUM_PONTOS=1000000000000/NUM_THREADS;
+	NUM_PONTOS=10000000000/NUM_THREADS;
 
 	for (i=0; i<NUM_PONTOS; i++){
 		resultado = sin(1.77)*cos(.99);
